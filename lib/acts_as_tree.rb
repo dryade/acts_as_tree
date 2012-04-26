@@ -75,24 +75,24 @@ module ActsAsTree
     #                            if set to +true+ (default: +false+).
     def acts_as_tree(options = {})
       configuration = {
-        foreign_key:   "parent_id",
-        order:         nil,
-        counter_cache: nil,
-        dependent:     :destroy
+        :foreign_key =>   "parent_id",
+        :order  =>         nil,
+        :counter_cache => nil,
+        :dependent =>     :destroy
       }
 
       configuration.update(options) if options.is_a?(Hash)
 
-      belongs_to :parent, class_name:    name,
-        foreign_key:   configuration[:foreign_key],
-        counter_cache: configuration[:counter_cache],
-        inverse_of:    :children
+      belongs_to :parent, :class_name =>    name,
+        :foreign_key  =>   configuration[:foreign_key],
+        :counter_cache => configuration[:counter_cache],
+        :inverse_of =>    :children
 
-      has_many :children, class_name:  name,
-        foreign_key: configuration[:foreign_key],
-        order:       configuration[:order],
-        dependent:   configuration[:dependent],
-        inverse_of:  :parent
+      has_many :children, :class_name =>  name,
+        :foreign_key => configuration[:foreign_key],
+        :order =>       configuration[:order],
+        :dependent =>   configuration[:dependent],
+        :inverse_of =>  :parent
 
       class_eval <<-EOV
             include ActsAsTree::InstanceMethods
@@ -102,15 +102,15 @@ module ActsAsTree
             def self.roots
               order_option = %Q{#{configuration.fetch :order, "nil"}}
 
-              find(:all, conditions: "#{configuration[:foreign_key]} IS NULL",
-                         order:      order_option)
+              find(:all, :conditions => "#{configuration[:foreign_key]} IS NULL",
+                         :order =>      order_option)
             end
 
             def self.root
               order_option = %Q{#{configuration.fetch :order, "nil"}}
 
-              find(:first, conditions: "#{configuration[:foreign_key]} IS NULL",
-                           order:      order_option)
+              find(:first, :conditions => "#{configuration[:foreign_key]} IS NULL",
+                           :order =>      order_option)
             end
       EOV
     end
