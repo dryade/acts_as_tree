@@ -3,11 +3,11 @@ $:.push File.expand_path("../lib", __FILE__)
 require 'acts_as_tree/version'
 
 Gem::Specification.new do |s|
-  s.name        = 'acts_as_tree'
+  s.name        = 'acts_as_tree-1.8'
   s.version     = ActsAsTree::VERSION
   s.authors     = ['Erik Dahlstrand', 'Rails Core', 'Mark Turner', 'Swanand Pagnis']
   s.email       = ['erik.dahlstrand@gmail.com', 'mark@amerine.net', 'swanand.pagnis@gmail.com']
-  s.homepage    = 'https://github.com/amerine/acts_as_tree'
+  s.homepage    = 'https://github.com/dryade/acts_as_tree'
   s.summary     = %q{Provides a simple tree behaviour to active_record models.}
   s.description = %q{A gem that adds simple support for organizing ActiveRecord models into parent–children relationships.}
 
